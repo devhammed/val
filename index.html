@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en" xmlns:x-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Be My Valentine</title>
+    <style>
+        [x-cloak] {
+            display: none;
+        }
+    </style>
+    <script>
+        function confetti() {
+            tsParticles.load({
+                id: "tsparticles",
+                options: {
+                    "fullScreen": {
+                        "zIndex": 1
+                    },
+                    "emitters": [
+                        {
+                            "position": {
+                                "x": 0,
+                                "y": 30
+                            },
+                            "rate": {
+                                "quantity": 5,
+                                "delay": 0.15
+                            },
+                            "particles": {
+                                "move": {
+                                    "direction": "top-right",
+                                    "outModes": {
+                                        "top": "none",
+                                        "left": "none",
+                                        "default": "destroy"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "position": {
+                                "x": 100,
+                                "y": 30
+                            },
+                            "rate": {
+                                "quantity": 5,
+                                "delay": 0.15
+                            },
+                            "particles": {
+                                "move": {
+                                    "direction": "top-left",
+                                    "outModes": {
+                                        "top": "none",
+                                        "right": "none",
+                                        "default": "destroy"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "particles": {
+                        "color": {
+                            "value": [
+                                "#ffffff",
+                                "#FF0000"
+                            ]
+                        },
+                        "move": {
+                            "decay": 0.05,
+                            "direction": "top",
+                            "enable": true,
+                            "gravity": {
+                                "enable": true
+                            },
+                            "outModes": {
+                                "top": "none",
+                                "default": "destroy"
+                            },
+                            "speed": {
+                                "min": 10,
+                                "max": 50
+                            }
+                        },
+                        "number": {
+                            "value": 0
+                        },
+                        "opacity": {
+                            "value": 1
+                        },
+                        "rotate": {
+                            "value": {
+                                "min": 0,
+                                "max": 360
+                            },
+                            "direction": "random",
+                            "animation": {
+                                "enable": true,
+                                "speed": 30
+                            }
+                        },
+                        "tilt": {
+                            "direction": "random",
+                            "enable": true,
+                            "value": {
+                                "min": 0,
+                                "max": 360
+                            },
+                            "animation": {
+                                "enable": true,
+                                "speed": 30
+                            }
+                        },
+                        "size": {
+                            "value": {
+                                "min": 0,
+                                "max": 2
+                            },
+                            "animation": {
+                                "enable": true,
+                                "startValue": "min",
+                                "count": 1,
+                                "speed": 16,
+                                "sync": true
+                            }
+                        },
+                        "roll": {
+                            "darken": {
+                                "enable": true,
+                                "value": 25
+                            },
+                            "enable": true,
+                            "speed": {
+                                "min": 5,
+                                "max": 15
+                            }
+                        },
+                        "wobble": {
+                            "distance": 30,
+                            "enable": true,
+                            "speed": {
+                                "min": -7,
+                                "max": 7
+                            }
+                        },
+                        "shape": {
+                            "type": "emoji",
+                            "options": {
+                                "emoji": {
+                                    "particles": {
+                                        "size": {
+                                            "value": 8
+                                        }
+                                    },
+                                    "value": [
+                                        "💩",
+                                        "🤡",
+                                        "🍀",
+                                        "🍙",
+                                        "🦄",
+                                        "⭐️"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+    <script defer src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+</head>
+<body
+    class="flex flex-col items-center justify-center h-screen bg-gray-100"
+    x-data="{
+        asked: false,
+        accepted: false,
+        interval: null,
+        yes: function() {
+            this.accepted = true;
+            this.asked = true;
+        },
+        no: function() {
+            this.accepted = false;
+            this.asked = true;
+        },
+        init: function() {
+            var self = this;
+
+            self.$watch('accepted', function(value) {
+                if ( ! value) {
+                    clearInterval(self.interval);
+                    return;
+                }
+
+                confetti();
+
+                self.interval = setInterval(function () {
+                    confetti();
+                }, 1000);
+            });
+        }
+    }"
+>
+    <div x-cloak x-show="! asked" class="space-y-4 text-center w-[300px] lg:w-[500px]">
+        <h1 class="text-4xl font-bold text-black">
+            Hey Asake,
+        </h1>
+
+        <img
+            src="images/val.gif"
+            alt="Valentine's Day"
+            class="w-full h-auto rounded-lg shadow-sm"
+        />
+
+        <div class="flex items-center justify-center gap-4">
+            <button
+                x-on:click="yes()"
+                class="mt-4 px-4 py-2 bg-green-500 font-bold text-white rounded-lg shadow-sm h-12 w-1/2"
+            >
+                Yes
+            </button>
+
+            <button
+                x-on:click="no()"
+                class="mt-4 px-4 py-2 bg-red-500 font-bold text-white rounded-lg shadow-sm h-12 w-1/2"
+            >
+                No
+            </button>
+        </div>
+    </div>
+
+    <div x-cloak x-show="asked" class="space-y-4 text-center w-[300px] lg:w-[500px]">
+        <div x-show="accepted" class="space-y-4">
+            <h1 class="text-4xl font-bold text-black">
+                I love you Asake 😍
+            </h1>
+
+            <img
+                src="images/cat-dance.gif"
+                alt="Cat Dance"
+                class="w-full h-auto rounded-lg shadow-sm"
+            />
+        </div>
+
+        <div x-show="! accepted" class="space-y-4">
+            <h1 class="text-4xl font-bold text-black">
+                Go back and think about it 😢
+            </h1>
+
+            <img
+                src="images/cat-crying.webp"
+                alt="Cat Cry"
+                class="w-full h-auto rounded-lg shadow-sm"
+            />
+        </div>
+    </div>
+</body>
+</html>
