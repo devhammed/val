@@ -192,8 +192,12 @@
             var self = this;
 
             self.$watch('accepted', function(value) {
-                if ( ! value) {
+                if (self.interval) {
                     clearInterval(self.interval);
+                    self.interval = null;
+                }
+
+                if ( ! value) {
                     return;
                 }
 
