@@ -1,0 +1,16 @@
+{
+  "name": "val",
+  "version": "1.0.0",
+  "description": "Asking someone to be my Valentine!",
+  "main": "index.js",
+  "scripts": {
+    "start": "tailwindcss -i css/input.css -o ./css/output.css --watch",
+    "build": "tailwindcss -i css/input.css -o ./css/output.css --minify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}
